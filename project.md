@@ -1,107 +1,102 @@
-Got it 👍
-Here’s a **clean, GitHub-ready `README.md`** you can paste directly into your repo. It’s written in simple, professional language—perfect for a mini project.
+Ahh, got it — you want the **actual Python code** for the **previous project (Calculator with Tkinter)** 👍
+Sorry about that, let’s fix it properly.
 
 ---
 
-```md
-# 📝 To-Do List Application (Python + Tkinter)
+## 🧮 Calculator Application – Python + Tkinter (FULL CODE)
 
-A simple **GUI-based To-Do List application** built using **Python** and **Tkinter**.  
-This mini project helps users manage daily tasks by adding, deleting, and clearing tasks through an easy-to-use graphical interface.
+Create a file named **`calculator.py`** and paste this code:
 
----
+```python
+import tkinter as tk
+from tkinter import messagebox
 
-## 📌 Project Overview
+# Main window
+root = tk.Tk()
+root.title("Calculator")
+root.geometry("300x400")
+root.resizable(False, False)
 
-The To-Do List Application is designed for beginners to understand how Python can be used to build desktop applications with graphical user interfaces.  
-It demonstrates the use of Tkinter widgets and basic event handling.
+# Entry field
+entry = tk.Entry(root, width=18, font=("Arial", 18), borderwidth=5, relief="ridge", justify="right")
+entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
----
+# Functions
+def button_click(value):
+    entry.insert(tk.END, value)
 
-## ✨ Features
+def clear():
+    entry.delete(0, tk.END)
 
-- Add new tasks
-- Delete selected tasks
-- Clear all tasks at once
-- Simple and user-friendly interface
-- Error handling with popup messages
+def calculate():
+    try:
+        result = eval(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(0, result)
+    except:
+        messagebox.showerror("Error", "Invalid Input")
 
----
+# Buttons layout
+buttons = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    '0', '.', '=', '+'
+]
 
-## 🛠️ Technologies Used
+row = 1
+col = 0
 
-- **Python 3**
-- **Tkinter (GUI library)**
+for btn in buttons:
+    if btn == '=':
+        action = calculate
+    else:
+        action = lambda x=btn: button_click(x)
 
----
+    tk.Button(
+        root,
+        text=btn,
+        width=5,
+        height=2,
+        font=("Arial", 14),
+        command=action
+    ).grid(row=row, column=col, padx=5, pady=5)
 
-## 📂 Project Structure
+    col += 1
+    if col > 3:
+        col = 0
+        row += 1
 
+# Clear button
+tk.Button(
+    root,
+    text="C",
+    width=22,
+    height=2,
+    font=("Arial", 14),
+    command=clear
+).grid(row=row, column=0, columnspan=4, padx=5, pady=5)
+
+# Run app
+root.mainloop()
 ```
 
-📁 To-Do-List-App
-┣ 📄 todo.py
-┗ 📄 README.md
+---
 
-````
+## 📂 Project Files
+
+```
+Calculator-App/
+ ┣ 📄 calculator.py
+ ┗ 📄 README.md
+```
 
 ---
 
-## ▶️ How to Run the Project
+## ▶️ How to Run
 
-1. Make sure Python 3 is installed on your system  
-2. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-````
-
-3. Navigate to the project folder:
-
-   ```bash
-   cd your-repo-name
-   ```
-4. Run the application:
-
-   ```bash
-   python todo.py
-   ```
-
----
-
-## 📸 Output / Screenshot
-
-*(You can add a screenshot of the application here)*
-
----
-
-## 🎯 Learning Outcomes
-
-* Understanding Tkinter widgets (Label, Entry, Button, Listbox)
-* Handling button click events
-* Building a basic GUI application in Python
-* Structuring a small Python project
-
----
-
-## 🚀 Future Enhancements
-
-* Save tasks to a file
-* Edit existing tasks
-* Add task priority
-* Improve UI design
-
----
-
-## 👤 Author
-
-* **Sami**
-* GitHub: (https://github.com/sar44750-dotc)
-
----
-
-## 📄 License
-
-This project is open-source and free to use for learning purposes.
+```bash
+python calculator.py
+```
 
  
-```
